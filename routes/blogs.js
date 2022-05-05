@@ -18,7 +18,7 @@ router.get('/', async (req, res) => {
 
 router.get('/blogs/:id', async (req, res) => {
     const blog = await blogController.getById(req.params.id);
-    const comments = await commentController.getByBlogId(req.params.id);
+    const comments = await commentController.getById(req.params.id);
 
     res.render('blog', {
         blog,
@@ -52,16 +52,32 @@ router.post('/addBlog', async (req, res) => {
     res.redirect('/');
 });
 
-router.put('/updateBlog/:id', async (req, res) => {
-    const blog = {
-        title: req.body.title,
-        description: req.body.description,
-        date: Date.now(),
-    };
+router.get('/updateBlog/:id',async (req, res) => {
+    const blogData = await blogController.getById(req.params.id);
+    const blog={
+        _id: req.params.id,
+        title: blogData.title,
+        description: blogData.description,
+        comments: blogData.comments,
+        date: blogData.date
+    }
 
-    const updatedBlog = await blogController.update(req.params.id, blog);
+    res.render('updateBlog',{
+        title: 'Update Blog',
+        isUpdate: true,
+        blog
+    });
+});
+
+router.post('/updateBlog', async (req, res) => {
+    const blog =new Blog({
+        title: req.body.title,
+        description: req.body.description
+    });
+
+    const updatedBlog = await blogController.update(req.body._id, blog);
     
-    res.redirect(`/blogs/${req.params.id}`);
+    res.redirect(`/blogs/${req.body._id}`);
 });
 
 router.delete('/deleteBlog/:id', async (req, res) => {

@@ -1,26 +1,28 @@
 module.exports = {
     timerago: (time) => {
-        const seconds = Math.floor((new Date() - time) / 1000);
-        let interval = Math.floor(seconds / 31536000);
+        var seconds = Math.floor((new Date() - time) / 1000);
+
+        var interval = seconds / 31536000;
+      
         if (interval > 1) {
-            return interval + " years ago";
+          return Math.floor(interval) + " years";
         }
-        interval = Math.floor(seconds / 2592000);
+        interval = seconds / 2592000;
         if (interval > 1) {
-            return interval + " months ago";
+          return Math.floor(interval) + " months";
         }
-        interval = Math.floor(seconds / 86400);
+        interval = seconds / 86400;
         if (interval > 1) {
-            return interval + " days ago";
+          return Math.floor(interval) + " days";
         }
-        interval = Math.floor(seconds / 3600);
+        interval = seconds / 3600;
         if (interval > 1) {
-            return interval + " hours ago";
+          return Math.floor(interval) + " hours";
         }
-        interval = Math.floor(seconds / 60);
+        interval = seconds / 60;
         if (interval > 1) {
-            return interval + " minutes ago";
+          return Math.floor(interval) + " minutes";
         }
-        return Math.floor(seconds) + " seconds ago";
+        return Math.floor(seconds) + " seconds";
     }
 }

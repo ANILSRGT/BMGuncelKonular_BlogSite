@@ -4,10 +4,18 @@
     <li class="blog collection-item avatar">
         <img src="" alt="" class="circle">
         <h5 style="margin: 0; margin-bottom:5px;">{{title}}</h5>
-        <p>{{description}}<br>
-            <p style="font-weight: 200; text-align: right;">{{timerago blog.date}}</p>
-        </p>
-        <span class="secondary-content"><i class="material-icons">comment</i>{{comment.length}}</span>
+        <p>{{description}}</p>
+        <a href="/updateBlog/{{_id}}" class="secondary-content"><i class="material-icons">edit</i></a>
+        <hr style="margin: 25px 0px 5px 0;">
+        <div class="row" style="margin: 0; padding: 2.5px 0px;">
+            <div class="col" style="float: left; padding-left:0;">
+                <i class="material-icons" style="vertical-align: middle;">comment</i>
+                <span>{{comments.length}}</span>
+            </div>
+            <div class="col" style="float: right; padding-right:0;">
+                {{timerago date}}
+            </div>
+        </div>
     </li>
     {{/each}}
 </ul>

@@ -1,3 +1,4 @@
+const { default: mongoose } = require('mongoose');
 const Blog = require('../models/Blog');
 
 class BlogController {
@@ -17,7 +18,8 @@ class BlogController {
     }
 
     async update(id, blog) {
-        const updatedBlog = await Blog.findByIdAndUpdate(id, blog, {new: true});
+        const newvalues = { $set: {title: blog.title, description: blog.description , date:Date.now()} };
+        const updatedBlog = await Blog.findOneAndUpdate({_id: mongoose.Types.ObjectId(id)}, newvalues, {new: true});
         return updatedBlog;
     }
 
