@@ -1,9 +1,9 @@
 const {Router} = require('express');
-const { route } = require('express/lib/application');
-const { model } = require('mongoose');
 const router = Router();
 const BlogController = require('../controllers/BlogController');
 const CommentController = require('../controllers/CommentController');
+const Blog = require('../models/Blog');
+const Comment= require('../models/Comment');
 
 const blogController = new BlogController();
 const commentController = new CommentController();

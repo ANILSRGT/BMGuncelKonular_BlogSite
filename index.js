@@ -13,6 +13,7 @@ const mongoUrl= 'mongodb+srv://ANILSRGT:1234567890@cluster0.2ssnt.mongodb.net/my
 const hbs=exphbs.create({
     defaultLayout:'main',
     extname: 'hbs',
+    helpers:require('./helpers/hbs_helpers')
 });
 
 app.engine('hbs',hbs.engine);

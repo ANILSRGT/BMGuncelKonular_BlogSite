@@ -7,7 +7,7 @@ class BlogController {
     }
 
     async getAll() {
-        const blogs = await Blog.find();
+        const blogs = await Blog.find().lean();
         return blogs;
     }
 
