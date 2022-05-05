@@ -1,0 +1,29 @@
+{
+  "name": "bmguncelkonular_blogsite",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js",
+    "dev": "nodemon index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ANILSRGT/BMGuncelKonular_BlogSite.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/ANILSRGT/BMGuncelKonular_BlogSite/issues"
+  },
+  "homepage": "https://github.com/ANILSRGT/BMGuncelKonular_BlogSite#readme",
+  "dependencies": {
+    "express": "^4.18.1",
+    "express-handlebars": "^6.0.5",
+    "mongoose": "^6.3.2"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.16"
+  }
+}
