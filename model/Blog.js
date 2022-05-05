@@ -1,0 +1,23 @@
+const {Schema, model} = require('mongoose');
+
+const schema=new Schema({
+    title:{
+        type:String,
+        required:true
+    },
+    description:{
+        type:String,
+        required:true,
+    },
+    date:{
+        type:Date,
+        default:Date.now,
+        required:false
+    },
+    comments:[{
+        type:Schema.Types.ObjectId,
+        ref:'Comment'
+    }]
+});
+
+module.exports=model('Blog',schema);
