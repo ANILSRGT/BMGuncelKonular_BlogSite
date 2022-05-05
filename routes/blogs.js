@@ -106,8 +106,11 @@ router.post('/updateBlog', async (req, res) => {
     res.redirect(`/blogs/${req.body._id}`);
 });
 
-router.delete('/deleteBlog/:id', async (req, res) => {
+router.get('/deleteBlog/:id', async (req, res) => {
     const deletedBlog = await blogController.delete(req.params.id);
+    deletedBlog.comments.map(async comment => {
+        await commentController.delete(comment);
+    });
     res.redirect('/');
 });
 

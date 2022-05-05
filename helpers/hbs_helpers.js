@@ -24,5 +24,11 @@ module.exports = {
           return Math.floor(interval) + " minutes";
         }
         return Math.floor(seconds) + " seconds";
+    },
+    formatDate: (date) => {
+        return date.toLocaleDateString() + " - " + date.toLocaleTimeString();
+    },
+    reverseArray: (arr) => {
+        return arr.reverse();
     }
 }
