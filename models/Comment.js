@@ -16,6 +16,15 @@ const schema=new Schema({
     comment:{
         type:String,
         required:true
+    },
+    blogId:{
+        type:Schema.Types.ObjectId,
+        required:true
+    },
+    date:{
+        type:Date,
+        default:Date.now,
+        required:false
     }
 });
 

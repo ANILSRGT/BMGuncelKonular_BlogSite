@@ -1,9 +1,9 @@
-const {Router} = require('express');
+const { Router } = require('express');
 const router = Router();
 const BlogController = require('../controllers/BlogController');
 const CommentController = require('../controllers/CommentController');
 const Blog = require('../models/Blog');
-const Comment= require('../models/Comment');
+const Comment = require('../models/Comment');
 
 const blogController = new BlogController();
 const commentController = new CommentController();
@@ -17,8 +17,27 @@ router.get('/', async (req, res) => {
 });
 
 router.get('/blogs/:id', async (req, res) => {
-    const blog = await blogController.getById(req.params.id);
-    const comments = await commentController.getById(req.params.id);
+    const blogData = await blogController.getById(req.params.id);
+    const blog = {
+        _id: req.params.id,
+        title: blogData.title,
+        description: blogData.description,
+        comments: blogData.comments,
+        date: blogData.date
+    }
+
+    const comments = await Promise.all(blogData.comments.map(async comment => {
+        const newCommentsData= await commentController.getById(comment);
+        const newComment = {
+            firstName: newCommentsData.firstName,
+            lastName: newCommentsData.lastName,
+            email: newCommentsData.email,
+            comment: newCommentsData.comment,
+            blogId: newCommentsData.blogId,
+            date: newCommentsData.date
+        };
+        return newComment;
+    }));
 
     res.render('blog', {
         blog,
@@ -26,16 +45,23 @@ router.get('/blogs/:id', async (req, res) => {
     });
 });
 
-router.post('/blogs/:id', async (req, res) => {
-    const comment = req.body;
-    comment.blogId = req.params.id;
-    const newComment = await commentController.create(comment);
+router.post('/blogs', async (req, res) => {
+    const newComment = new Comment({
+        firstName: req.body.firstName,
+        lastName: req.body.lastName,
+        email: req.body.email,
+        comment: req.body.comment,
+        blogId: req.body._blogId,
+        date:req.body.date
+    });
 
-    res.redirect(`/blogs/${req.params.id}`);
+    await blogController.addComment(req.body._blogId, newComment);
+
+    res.redirect(`/blogs/${req.body._blogId}`);
 });
 
 router.get('/addBlog', (req, res) => {
-    res.render('addBlog',{
+    res.render('addBlog', {
         title: 'Add Blog',
         isCreate: true
     });
@@ -52,9 +78,9 @@ router.post('/addBlog', async (req, res) => {
     res.redirect('/');
 });
 
-router.get('/updateBlog/:id',async (req, res) => {
+router.get('/updateBlog/:id', async (req, res) => {
     const blogData = await blogController.getById(req.params.id);
-    const blog={
+    const blog = {
         _id: req.params.id,
         title: blogData.title,
         description: blogData.description,
@@ -62,7 +88,7 @@ router.get('/updateBlog/:id',async (req, res) => {
         date: blogData.date
     }
 
-    res.render('updateBlog',{
+    res.render('updateBlog', {
         title: 'Update Blog',
         isUpdate: true,
         blog
@@ -70,13 +96,13 @@ router.get('/updateBlog/:id',async (req, res) => {
 });
 
 router.post('/updateBlog', async (req, res) => {
-    const blog =new Blog({
+    const blog = new Blog({
         title: req.body.title,
         description: req.body.description
     });
 
     const updatedBlog = await blogController.update(req.body._id, blog);
-    
+
     res.redirect(`/blogs/${req.body._id}`);
 });
 

@@ -14,6 +14,10 @@ const schema=new Schema({
         default:Date.now,
         required:false
     },
+    pictureUrl:{
+        type:String,
+        required:false
+    },
     comments:[{
         type:Schema.Types.ObjectId,
         ref:'Comment'
