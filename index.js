@@ -3,6 +3,9 @@ const app=express();
 const mongoose = require('mongoose');
 const path = require('path');
 const exphbs = require('express-handlebars');
+const blogRouter=require('./routes/blogs');
+
+app.use(express.json());
 
 const PORT=process.env.PORT || 3000;
 const mongoUrl= 'mongodb+srv://ANILSRGT:1234567890@cluster0.2ssnt.mongodb.net/myFirstDatabase?retryWrites=true&w=majority';
@@ -18,6 +21,7 @@ app.set('views','views');
 
 app.use(express.urlencoded({extended:true}));
 app.use(express.static(path.join(__dirname,'public')));
+app.use('/',blogRouter);
 
 async function start(){
     try {

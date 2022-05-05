@@ -1,0 +1,22 @@
+<nav class="red darken-1">
+    <div class="navbar-fixed">
+        <nav>
+            <div class="nav-wrapper">
+                <a href="#!" class="brand-logo">Blog Sea</a>
+                <ul class="right hide-on-med-and-down">
+                    {{#if isIndex}}
+                    <li class="active"><a href="/">Blogs</a></li>
+                    {{else}}
+                    <li><a href="/">Blogs</a></li>
+                    {{/if}}
+
+                    {{#if isCreate}}
+                    <li><a href="/addBlog">Add Blog</a></li>
+                    {{else}}
+                    <li><a href="/addBlog">Add Blog</a></li>
+                    {{/if}}
+                </ul>
+            </div>
+        </nav>
+    </div>
+</nav>

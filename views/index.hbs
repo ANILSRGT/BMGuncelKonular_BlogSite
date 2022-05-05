@@ -1,0 +1,15 @@
+{{#if blogs.length}}
+<ul>
+    {{#each blogs}}
+    <li class="blog">
+        <form action="/" method="get">
+            <label>
+                <span>deneme</span>
+            </label>
+        </form>
+    </li>
+    {{/each}}
+</ul>
+{{else}}
+<p>No blogs found!</p>
+{{/if}}
