@@ -1,0 +1,59 @@
+<div style="padding: 0 25px 0 25px;">
+    <div style="position: relative;">
+        <center style="margin-top: 20px;"><img src="" alt="" class="circle" style="width: 576px;height: 324px;">
+        </center>
+        <a href="/deleteBlog/{{blog._id}}" style="position: absolute; right: 0; top: 0;">
+            <i class="material-icons">delete</i>
+        </a>
+    </div>
+    <center>
+        <h3 style="margin: 5px 0 0 0;">{{blog.title}}</h3>
+    </center>
+    <hr>
+    <p style="text-indent: 25px;">{{blog.description}}</p>
+    <p style="text-align: right;">{{formatDate blog.date}}</p>
+    <hr>
+    <h4>Comments</h4>
+    <div style="border: 2px dotted;padding:10px;">
+        <form action="/blogs" method="post" class="both">
+            <label>First Name</label>
+            <input id="icon_prefix" name="firstName" type="text">
+
+            <label>Last Name</label>
+            <input id="icon_prefix" name="lastName" type="text">
+
+            <label>Email</label>
+            <input id="icon_prefix" name="email" type="text">
+
+            <label>Comment</label>
+            <input id="icon_prefix" name="comment" type="text">
+
+            <br><br>
+
+            <input type="hidden" name="_blogId" value="{{blog._id}}">
+
+            <button style="float: right;" class="btn waves-effect waves-light" type="submit"
+                name="action">Submit</button>
+        </form>
+        <hr>
+        {{#if comments.length}}
+        {{#each (reverseArray comments) as |comment|}}
+        <div class="row">
+            <div class="card blue-grey darken-1">
+                <div class="card-content white-text">
+                    <span class="card-title" style="font-weight: 500;">{{comment.firstName}} {{comment.lastName}}</span>
+                    <p>{{comment.comment}}</p>
+                </div>
+                <div class="card-action both">
+                    <span style="color: lightgray;float:left;">{{comment.email}}</span>
+                    <span style="color: lightgray;float:right;">{{timerago comment.date}}</span>
+                </div>
+            </div>
+        </div>
+        {{/each}}
+        {{else}}
+        <p>No comments found!</p>
+        {{/if}}
+    </div>
+    <br>
+</div>

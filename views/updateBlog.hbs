@@ -1,0 +1,24 @@
+<div style="padding: 10px;">
+    <form action="/updateBlog" method="post" class="both">
+        <h2>Add Blog</h2>
+
+        <div>
+            <label for="icon_prefix">Title</label>
+            <input id="icon_prefix" type="text" name="title" value="{{blog.title}}">
+
+            <br><br>
+
+            <label for="icon_prefix">Description</label>
+            <textarea id="icon_prefix" name="description" style="resize: vertical;height:250px;">
+                {{blog.description}}
+            </textarea>
+        </div>
+
+        <br>
+
+        <input type="hidden" name="_id" value="{{blog._id}}">
+        <button class="waves-effect waves-light btn" type="submit" style="float: right;">
+            <i class="material-icons left">autorenew</i>Update
+        </button>
+    </form>
+</div>

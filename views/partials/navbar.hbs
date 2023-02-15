@@ -1,0 +1,36 @@
+<div class="red darken-1 navbar-fixed">
+    <nav>
+        <div class="nav-wrapper">
+            <a href="/" class="brand-logo">Blog Sea</a>
+            <a href="#" data-target="mobile-demo" class="sidenav-trigger">
+                <i class="material-icons">menu</i>
+            </a>
+            <ul class="right hide-on-med-and-down">
+                {{#if isIndex}}
+                <li class="active"><a href="/">Blogs</a></li>
+                {{else}}
+                <li><a href="/">Blogs</a></li>
+                {{/if}}
+
+                {{#if isCreate}}
+                <li><a href="/addBlog">Add Blog</a></li>
+                {{else}}
+                <li><a href="/addBlog">Add Blog</a></li>
+                {{/if}}
+            </ul>
+        </div>
+    </nav>
+</div>
+<ul class="sidenav" id="mobile-demo">
+    {{#if isIndex}}
+    <li class="active"><a href="/">Blogs</a></li>
+    {{else}}
+    <li><a href="/">Blogs</a></li>
+    {{/if}}
+
+    {{#if isCreate}}
+    <li><a href="/addBlog">Add Blog</a></li>
+    {{else}}
+    <li><a href="/addBlog">Add Blog</a></li>
+    {{/if}}
+</ul>

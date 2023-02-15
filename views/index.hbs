@@ -1,0 +1,27 @@
+{{#if blogs.length}}
+<ul class="collection">
+    {{#each blogs as |blog|}}
+    <li class="blog collection-item avatar">
+        <a href="/blogs/{{_id}}"><img src="" alt="" class="circle"></a>
+        <div class="row" style="margin: 0 0 5px 0;">
+            <a href="/blogs/{{_id}}" class="col" style="float: left;padding:0;"><h5 style="margin: 0;">{{title}}</h5></a>
+            <a href="/updateBlog/{{_id}}" class="col" style="float: right;padding:0;"><i class="material-icons">edit</i></a>
+        </div>
+        <a href="/blogs/{{_id}}"><p class="threeLineLimit">{{description}}</p></a>
+        <hr style="margin: 25px 0px 5px 0;">
+        <div class="row" style="margin: 0; padding: 2.5px 0px;">
+            <div class="col" style="float: left; padding-left:0;">
+                <i class="material-icons" style="vertical-align: middle;">comment</i>
+                <span>{{comments.length}}</span>
+            </div>
+            <div class="col" style="float: right; padding-right:0;">
+                {{timerago date}}
+            </div>
+        </div>
+    </li>
+    
+    {{/each}}
+</ul>
+{{else}}
+<p>No blogs found!</p>
+{{/if}}
